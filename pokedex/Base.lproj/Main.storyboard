@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--POKEDEX-->
+        <!--Pokedex-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="PokemonListVC" customModule="pokedex" customModuleProvider="target" sceneMemberID="viewController">
@@ -111,7 +111,14 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="POKEDEX" id="1eB-B5-iY2"/>
+                    <navigationItem key="navigationItem" title="Pokedex" id="1eB-B5-iY2">
+                        <barButtonItem key="rightBarButtonItem" systemItem="pause" id="aDz-p2-huw">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="musicBtnPressed:" destination="BYZ-38-t0r" id="BHa-8F-BnU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collection" destination="7HC-A1-exL" id="eux-U6-6Nd"/>
                     </connections>
@@ -129,6 +136,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

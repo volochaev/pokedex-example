@@ -7,25 +7,43 @@
 //
 
 import UIKit
+import AVFoundation
 
 class PokemonListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var collection: UICollectionView!
     
     var pokemons = [Pokemon]()
+    var musicPlayer: AVAudioPlayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collection.delegate = self
         collection.dataSource = self
+
+        let attributesDictionary = [NSFontAttributeName: UIFont(name: "Pokemon Solid", size: 24)!, NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationController!.navigationBar.titleTextAttributes = attributesDictionary
         
+        initAudio()
         parsePokemonCSV()
-        
-        print(pokemons.count)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func initAudio() {
+        let path = NSBundle.mainBundle().pathForResource("music", ofType: "mp3")!
+        
+        do {
+            musicPlayer = try AVAudioPlayer(contentsOfURL: NSURL(string: path)!)
+            musicPlayer.prepareToPlay()
+            musicPlayer.numberOfLoops = -1
+            musicPlayer.play()
+        } catch let err as NSError {
+            print(err.debugDescription)
+        }
+        
     }
     
     func parsePokemonCSV() {
@@ -72,6 +90,16 @@ class PokemonListVC: UIViewController, UICollectionViewDelegate, UICollectionVie
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSizeMake(105, 105)
+    }
+    
+    @IBAction func musicBtnPressed(sender: UIBarButtonItem) {
+        if musicPlayer.playing {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Play, target: self, action: "musicBtnPressed:")
+            musicPlayer.stop()
+        } else {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Pause, target: self, action: "musicBtnPressed:")
+            musicPlayer.play()
+        }
     }
 }
 
