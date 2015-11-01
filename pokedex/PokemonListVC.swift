@@ -87,10 +87,6 @@ class PokemonListVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         }
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
-    }
-    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if inSearchMode {
             return filteredPokemons.count
@@ -126,6 +122,29 @@ class PokemonListVC: UIViewController, UICollectionViewDelegate, UICollectionVie
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         view.endEditing(true)
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let pokemon: Pokemon!
+        
+        if inSearchMode {
+            pokemon = filteredPokemons[indexPath.row]
+        } else {
+            pokemon = pokemons[indexPath.row]
+        }
+        
+        performSegueWithIdentifier("PokemonDetailVC", sender: pokemon)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "PokemonDetailVC" {
+            if let detailsVC = segue.destinationViewController as? PokemonDetailVC {
+                if let pokemon = sender as? Pokemon {
+                    print(pokemon.name)
+                    detailsVC.pokemon = pokemon
+                }
+            }
+        }
     }
     
     @IBAction func musicBtnPressed(sender: UIBarButtonItem) {
