@@ -121,6 +121,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collection" destination="7HC-A1-exL" id="eux-U6-6Nd"/>
+                        <outlet property="searchBar" destination="lXk-Or-YN4" id="iS8-Nd-JzA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
